@@ -11,20 +11,17 @@
       --text: #fff;
       --accent: #00f0ff;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       scroll-behavior: smooth;
     }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg);
       color: var(--text);
     }
-
     header {
       display: flex;
       justify-content: space-between;
@@ -37,72 +34,73 @@
       z-index: 999;
       box-shadow: 0 2px 5px #000;
     }
-
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
       color: var(--accent);
     }
-
     nav ul {
       list-style: none;
       display: flex;
       gap: 30px;
     }
-
     nav ul li a {
       text-decoration: none;
       color: #aaa;
       font-weight: 500;
       cursor: pointer;
     }
-
     nav ul li a:hover {
       color: var(--accent);
     }
-
     section {
       display: none;
       padding: 100px 10% 80px;
       animation: fadeIn 0.4s ease-in-out;
     }
-
     .active {
       display: flex !important;
     }
+.typing {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #fff;
+  animation: typing 3s steps(30, end) forwards;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .hero {
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       padding-top: 130px;
       display: flex;
+      position: relative;
     }
-
     .hero-text {
       max-width: 600px;
     }
-
     .hero-text h1 {
       font-size: 2.5rem;
     }
-
     .hero-text h2 {
       font-size: 1.5rem;
       color: var(--accent);
       margin: 10px 0 20px;
     }
-
     .hero-text p {
       margin-bottom: 20px;
       color: #bbb;
     }
-
     .buttons a {
       display: inline-block;
       padding: 12px 24px;
@@ -114,23 +112,19 @@
       text-decoration: none;
       transition: 0.3s;
     }
-
     .buttons a:hover {
       background-color: var(--accent);
       color: #000;
     }
-
     .social-icons {
       margin-top: 20px;
     }
-
     .social-icons a {
       margin-right: 15px;
       font-size: 1.5rem;
       color: var(--accent);
       text-decoration: none;
     }
-
     .profile-pic {
       width: 300px;
       height: 300px;
@@ -142,22 +136,93 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 1s ease 1s, transform 1s ease 1s;
     }
-
+    .show-profile {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .image-reveal {
+      animation: phatEffect 0.5s ease-out forwards;
+    }
+    @keyframes phatEffect {
+      0% {
+        transform: scale(0.8) rotate(-10deg);
+        filter: brightness(2);
+        box-shadow: 0 0 20px cyan;
+      }
+      100% {
+        transform: scale(1) rotate(0);
+        filter: brightness(1);
+        box-shadow: none;
+      }
+    }
     .profile-pic img {
       width: 100%;
       height: 100%;
-       object-position: top; /* Or try: center, 30% 20%, etc */
-  transform: scale(0.96);
+      object-fit: cover;
+      transform: scale(0.95); /* halki si badi */
+    }
+    .shooting-star {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      animation: shoot 1.2s ease-out forwards;
+      filter: drop-shadow(0 0 8px white);
+    }
+.text-appear {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textSlideUp 1s ease-out forwards;
+}
+
+@keyframes textSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.flicker {
+  color: #0ff;
+  animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; text-shadow: 0 0 5px #0ff; }
+  100% { opacity: 1; text-shadow: 0 0 15px #0ff, 0 0 30px #0ff; }
 }
 
 
+    @keyframes shoot {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(50vw, 150px) scale(1.5); opacity: 1; }
+    }
+    .blast {
+      position: absolute;
+      top: 150px;
+      left: 50vw;
+      width: 200px;
+      height: 200px;
+      transform: scale(0);
+      background: radial-gradient(white, transparent);
+      border-radius: 50%;
+      animation: blast 0.6s ease-out forwards;
+      z-index: 5;
+    }
+    @keyframes blast {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
     h2.section-title {
       text-align: center;
       font-size: 2rem;
       margin-bottom: 40px;
     }
-
     .skills-list ul {
       list-style: none;
       padding: 0;
@@ -166,7 +231,6 @@
       justify-content: center;
       gap: 20px;
     }
-
     .skills-list li {
       background: #1b1b1b;
       padding: 15px 25px;
@@ -174,7 +238,6 @@
       color: var(--accent);
       font-weight: bold;
     }
-
     .project-card {
       background-color: #1b1b1b;
       padding: 25px;
@@ -183,22 +246,18 @@
       max-width: 700px;
       box-shadow: 0 0 10px rgba(0,255,255,0.1);
     }
-
     .project-card h3 {
       color: #ff4c60;
     }
-
     .project-card a {
       color: var(--accent);
       text-decoration: underline;
     }
-
     .contact p {
       text-align: center;
       color: #ccc;
       font-size: 1rem;
     }
-
     footer {
       background: #111;
       text-align: center;
@@ -206,13 +265,11 @@
       color: #777;
       margin-top: 40px;
     }
-
     @media (max-width: 768px) {
       .hero {
         flex-direction: column;
         text-align: center;
       }
-
       .profile-pic {
         margin: 40px auto;
       }
@@ -220,8 +277,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
     <div class="logo">Portfolio.</div>
     <nav>
@@ -235,54 +290,57 @@
     </nav>
   </header>
 
-  <!-- Hero (Default) -->
   <section id="hero" class="active hero">
+    <svg class="shooting-star" viewBox="0 0 100 100">
+      <polygon points="50,5 61,38 95,38 67,58 78,91 50,70 22,91 33,58 5,38 39,38" fill="white" />
+    </svg>
+    <div class="blast"></div>
+
     <div class="hero-text">
-      <h1>Hello, It's Me</h1>
-      <h1><strong>Devansh Saxena</strong></h1>
-      <h2>Web Developer & AI Engineer</h2>
-      <p>Hello I am Devansh Saxena, a Student Of Computer Application.</p>
+      <h1 class="text-appear">Hello, It's Me</h1>
+      <h1 class="typing"><strong>Devansh Saxena</strong></h1>
+      <h2 class="text-appear>Web Developer & AI Engineer</h2>
+      <p class="flicker">Hello I am Devansh Saxena, a Student Of Computer Application.</p>
       <div class="buttons">
-        <a href="#" download>Download CV</a>
+        <a href="Devansh_Saxena_CV.pdf" download>Download CV</a>
       </div>
       <div class="social-icons">
         <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/_devansh_088/"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin"></i></a>
+  <a href="https://t.me/your_telegram_username" target="_blank"><i class="fab fa-telegram"></i></a>
+
       </div>
     </div>
-    <div class="profile-pic">
+    <div class="profile-pic" id="profilePic">
       <img src="image.jpg" alt="Devansh">
-      <!-- 📝 Replace 'your-image.jpg' with your actual file -->
     </div>
   </section>
 
-  <!-- About Section -->
   <section id="about">
     <h2 class="section-title">About Me</h2>
-    <p style="max-width: 700px; margin: auto; text-align: center; color: #ccc;">
-      I'm Devansh, a BCA student passionate about web development and artificial intelligence. I love building cool things and solving real-world problems using code.
+    <p class="flicker"style="max-width: 700px; margin: auto; text-align: center; color: #ccc;">
+      I'm Devansh, a BCA student passionate about web development and artificial intelligence.
     </p>
   </section>
 
-  <!-- Skills Section -->
   <section id="skills">
     <h2 class="section-title">Skills</h2>
     <div class="skills-list">
       <ul>
+ <h1 >                                          </h1>
         <li>HTML</li>
         <li>CSS</li>
         <li>JavaScript</li>
-        <li>Python</li>
-        <li>Flask</li>
-        <li>GitHub</li>
+        
+      
+        
         <li>React</li>
         <li>AI/ML Basics</li>
       </ul>
     </div>
   </section>
 
-  <!-- Projects Section -->
   <section id="projects">
     <h2 class="section-title">Projects</h2>
     <div class="project-card">
@@ -292,18 +350,15 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
   <section id="contact">
     <h2 class="section-title">Contact Me</h2>
     <p>📧 Email: <a href="mailto:devanshsaxena2343@gmail.com">devanshsaxena2343@gmail.com</a></p>
   </section>
 
-  <!-- Footer -->
   <footer>
     © 2025 Devansh Saxena. All rights reserved.
   </footer>
 
-  <!-- Section Toggle Script -->
   <script>
     function showSection(id) {
       const sections = document.querySelectorAll("section");
@@ -311,8 +366,18 @@
       document.getElementById(id).classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  </script>
 
+    window.addEventListener("load", () => {
+      const star = document.querySelector(".shooting-star");
+      const blast = document.querySelector(".blast");
+      const profile = document.getElementById("profilePic");
+
+      setTimeout(() => {
+        star.style.display = "none";
+        blast.style.display = "none";
+        profile.classList.add("show-profile", "image-reveal");
+      }, 1400);
+    });
+  </script>
 </body>
 </html>
-
